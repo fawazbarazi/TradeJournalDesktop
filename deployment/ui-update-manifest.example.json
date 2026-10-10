@@ -1,0 +1,6 @@
+{
+  "version": "1.0.1",
+  "uiUrl": "https://YOUR-TRUSTED-HOST.example/trade-journal/index.html",
+  "sha256": "5fa79dd607464e955eec8c0106d3c27b789215c0275ef92394640ddcf6d341da",
+  "notes": "Example manifest. Replace the host and update the version/hash whenever the UI changes."
+}

@@ -1,0 +1,24 @@
+{
+  "name": "trade-journal-desktop",
+  "version": "1.0.0",
+  "description": "Local-first desktop Trade Journal",
+  "main": "src/main.js",
+  "author": "Trade Journal",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^36.3.1",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.tradejournal.desktop",
+    "productName": "Trade Journal",
+    "directories": { "output": "dist" },
+    "files": ["src/**/*", "app/**/*", "package.json"],
+    "win": { "target": "nsis" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+  }
+}

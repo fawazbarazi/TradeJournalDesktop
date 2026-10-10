@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111111">
+<title>Trade Journal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+:root{--bg:#0c1119;--panel:#141d29;--panel2:#192535;--line:#273548;--text:#edf3fa;--muted:#93a3b8;--accent:#77a8ff;--green:#37d6a0;--red:#ff6e7d;--gold:#f3c969}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#152336 0,#0c1119 48%);color:var(--text);font-family:'Gotham','Montserrat',Arial,sans-serif;min-height:100vh;padding:0 0 96px}button,input,select{font:inherit}button{cursor:pointer}.app{max-width:620px;margin:auto;padding:18px 15px}.top{display:flex;justify-content:space-between;align-items:center;margin:8px 0 20px}.brand{display:flex;gap:11px;align-items:center}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,#79aaff,#5276e9);display:grid;place-items:center;font-size:22px;color:#08111f;font-weight:900;box-shadow:0 8px 24px #507ee533}.brand h1{font-size:20px;margin:0;letter-spacing:.2px}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.pill{font-size:11px;color:#a9c8ff;border:1px solid #344c6d;background:#17283d;padding:7px 10px;border-radius:20px}.section{background:linear-gradient(145deg,#172230,#121a25);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:15px;box-shadow:0 12px 28px #00000018}.month-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.month-title{font-size:18px;font-weight:750}.month-sub{color:var(--muted);font-size:12px;margin-top:3px}.arrows{display:flex;gap:7px}.icon-btn{border:1px solid var(--line);color:var(--text);background:#1a2736;width:37px;height:37px;border-radius:12px;font-size:19px}.weekdays,.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.weekdays div{text-align:center;color:#8496ac;font-size:11px;padding:6px 0}.day{min-height:54px;border:1px solid transparent;background:#111a25;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:7px 2px 5px;position:relative;color:#dce6f3}.day.empty{background:transparent;border-color:transparent}.day.weekend{background:#101010!important;border-color:#292929!important;color:#666!important;opacity:.58;cursor:not-allowed;box-shadow:none!important}.day.weekend .daynum{color:#777}.day.weekend:disabled{pointer-events:none}#addTrade:disabled{opacity:.35;cursor:not-allowed;filter:grayscale(1)}.day.today{border-color:#83aaff;box-shadow:inset 0 0 0 1px #83aaff33}.day.selected{background:#243c59;border-color:#78a8ff}.daynum{font-size:12px;line-height:18px}.day-result{font-size:9px;font-weight:800;line-height:13px;white-space:nowrap;margin-top:2px;letter-spacing:-.15px}.day-result.status-win{color:var(--green)}.day-result.status-loss{color:var(--red)}.day-result.status-be{color:var(--gold)}.legend{display:flex;gap:13px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:13px}.legend span{display:flex;align-items:center;gap:5px}.legend i{width:7px;height:7px;border-radius:50%;display:inline-block}.selected-head{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 12px}.selected-head h2{font-size:17px;margin:0}.selected-head span{color:var(--muted);font-size:12px}.trade-list{display:grid;gap:10px}.trade-card{background:linear-gradient(135deg,#182433,#131c27);border:1px solid #2a394c;border-radius:18px;padding:14px;position:relative;overflow:hidden}.trade-card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--muted)}.trade-card.win:before{background:var(--green)}.trade-card.loss:before{background:var(--red)}.trade-card.be:before{background:var(--gold)}.trade-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.asset{font-size:16px;font-weight:800;letter-spacing:.3px}.trade-meta{font-size:11px;color:var(--muted);margin-top:4px}.badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.badge{font-size:10px;border-radius:8px;padding:5px 8px;background:#223248;color:#b8d0f2}.badge.buy{background:#143a34;color:#6de0bc}.badge.sell{background:#41232c;color:#ff9ca7}.pnl{font-size:15px;font-weight:800;margin-top:13px;display:flex;justify-content:space-between;align-items:center}.pnl .positive{color:var(--green)}.pnl .negative{color:var(--red)}.pnl .neutral{color:var(--gold)}.setup-line{font-size:12px;color:#aebdd0;margin-top:9px;display:flex;justify-content:space-between;gap:10px}.card-actions{display:flex;gap:7px;margin-top:12px}.small-btn{border:1px solid #33465c;background:#1b2939;color:#d9e5f5;padding:6px 10px;border-radius:9px;font-size:11px}.small-btn.delete{color:#ff9ca7}.empty-state{text-align:center;padding:8px 4px;color:#aebdd0;font-size:11px;line-height:1.5;border:0;background:transparent;border-radius:0}.fab{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:min( calc(100% - 30px),590px);border:0;border-radius:17px;background:linear-gradient(100deg,#8ab4ff,#6b91f7);color:#091321;font-weight:850;padding:16px;box-shadow:0 12px 30px #0008;font-size:15px}.fab span{font-size:20px;vertical-align:-1px;margin-left:7px}.modal-back{position:fixed;inset:0;background:#05080dcc;display:none;align-items:flex-end;justify-content:center;z-index:10;padding:12px}.modal-back.open{display:flex}.modal{width:min(100%,600px);max-height:92vh;overflow:auto;background:#121c28;border:1px solid #304156;border-radius:24px 24px 18px 18px;padding:20px;box-shadow:0 20px 80px #0009}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.modal-head h2{font-size:18px;margin:0}.close{border:1px solid var(--line);background:#1a2736;color:var(--text);border-radius:10px;width:34px;height:34px;font-size:19px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#a8b8cc}.field input,.field select,.field textarea{width:100%;border:1px solid #304156;background:#0e1620;color:var(--text);padding:12px;border-radius:12px;outline:none;min-width:0}.field input:focus,.field select:focus,.field textarea:focus{border-color:#78a8ff}.radio-row{display:flex;gap:8px}.radio{flex:1;padding:11px;border-radius:12px;border:1px solid #304156;background:#0e1620;color:#aebdd0}.radio.active.buy{border-color:#37d6a0;background:#15362f;color:#7ce4c2}.radio.active.sell{border-color:#ff6e7d;background:#3b2029;color:#ff9da7}.setup-controls{display:flex;gap:7px}.setup-controls select{flex:1}.setup-controls button{border:1px solid #304156;background:#1b2939;color:#d9e5f5;border-radius:11px;padding:0 12px}.save-btn{width:100%;border:0;background:#83adff;color:#091321;font-weight:850;border-radius:13px;padding:14px;margin-top:17px}.hint{font-size:11px;color:#8496ac;line-height:1.6;margin-top:12px}.manage-list{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.setup-chip{display:flex;align-items:center;gap:6px;border:1px solid #304156;background:#1b2939;padding:6px 8px;border-radius:10px;font-size:12px}.setup-chip button{border:0;background:none;color:#ff9ca7;padding:0 2px}.toast{position:fixed;top:15px;left:50%;transform:translateX(-50%);background:#213449;border:1px solid #3b5674;color:#eef5ff;padding:11px 16px;border-radius:12px;font-size:12px;z-index:20;display:none}.toast.show{display:block}@media(min-width:520px){.app{padding-top:26px}.day{min-height:63px}.modal-back{align-items:center}.modal{border-radius:24px}}
+
+/* V3 graphite monochrome palette with deep green/red status colors */
+:root{--bg:#101010;--panel:#191919;--panel2:#222222;--line:#343434;--text:#f1f1ef;--muted:#a1a19d;--accent:#d7d7d2;--green:#4f8a68;--red:#984b53;--gold:#858580}
+body{background:linear-gradient(180deg,#191919 0%,#161616 100%);color:var(--text)}
+.logo{background:linear-gradient(135deg,#f1f1ef,#a6a6a1);color:#111111;box-shadow:0 8px 24px #00000055}
+.pill{color:#d0d0cb;border-color:#454545;background:#242424}
+.section{background:linear-gradient(145deg,#222222,#171717);border-color:#353535;box-shadow:0 12px 28px #00000030}
+.icon-btn{border-color:#393939;background:#262626;color:#f1f1ef}
+.weekdays div{color:#a3a39e}
+.day{background:#191919;color:#e7e7e3;border-color:#ffffff20}
+.day.today{border-color:#b9b9b3;box-shadow:inset 0 0 0 1px #ffffff12}
+.day.selected{background:#353535;border-color:#a7a7a1}
+.trade-card{background:linear-gradient(135deg,#242424,#191919);border-color:#373737}
+.badge{background:#303030;color:#deded9}
+.badge.buy{background:#203b2b;color:#9bc9aa}
+.badge.sell{background:#452328;color:#dca0a5}
+.pnl .neutral{color:#a6a6a0}
+.small-btn{border-color:#414141;background:#292929;color:#e2e2dd}
+.small-btn.delete{color:#dca0a5}
+.fab{background:linear-gradient(100deg,#f0f0ec,#c6c6c0);color:#111111;box-shadow:0 12px 30px #0008}
+.modal-back{background:#050505dd}
+.modal{background:#1b1b1b;border-color:#393939}
+.field label{color:#c1c1bb}
+.field input,.field select,.field textarea{border-color:#414141;background:#111111;color:var(--text)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#a9a9a3}
+.radio{border-color:#414141;background:#111111;color:#bdbdb7}
+.radio.active.buy{border-color:#4f8a68;background:#203b2b;color:#a8d4b5}
+.radio.active.sell{border-color:#984b53;background:#452328;color:#e0a5aa}
+.setup-controls button{border-color:#414141;background:#292929;color:#e2e2dd}
+.save-btn{background:linear-gradient(100deg,#e9e9e4,#c5c5bf);color:#111111}
+.setup-chip{border-color:#414141;background:#292929}
+.setup-chip button{color:#dca0a5}
+.toast{background:#292929;border-color:#484848;color:#f1f1ef}
+
+/* V5: compact trade cards with tap-to-view details */
+.trade-card{cursor:pointer;padding:13px 14px;background:#202020;border-color:#343434;transition:border-color .15s ease,background .15s ease}
+.trade-card:focus-visible{outline:2px solid #bdbdb7;outline-offset:2px}
+.trade-card:hover{background:#242424;border-color:#4a4a4a}
+.trade-card .trade-meta{display:none}
+.trade-card .pnl{margin-top:11px}
+.trade-card .trade-top{align-items:center}
+.trade-card .asset{font-size:16px}
+.card-hint{font-size:10px;color:#888883;margin-top:9px;text-align:right}
+.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.detail-item{background:#111;border:1px solid #353535;border-radius:12px;padding:12px;min-width:0}
+.detail-item span{display:block;color:#a1a19d;font-size:11px;margin-bottom:6px}
+.detail-item strong{display:block;color:#f1f1ef;font-size:14px;overflow-wrap:anywhere}
+.detail-actions{display:flex;gap:8px;margin-top:16px}
+.detail-actions button{flex:1;padding:12px;border-radius:12px}
+@media(min-width:520px){.details-modal-back{align-items:center}.details-modal{border-radius:24px}}
+
+/* V21: neutral calendar borders; only the daily R result carries outcome color */
+.day.status-win,.day.status-loss,.day.status-be,.day.status-none{border-color:#414141!important}
+.day.selected.status-win,.day.selected.status-loss,.day.selected.status-be,.day.selected.status-none{border-color:#a7a7a1!important}
+.day.today.status-win,.day.today.status-loss,.day.today.status-be,.day.today.status-none{border-color:#b9b9b3!important}
+
+.step-indicator{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin:0 0 20px;color:#929292;font-size:11px}.step-dot{width:27px;height:27px;border:1px solid #454545;border-radius:50%;display:grid;place-items:center;font-weight:800;background:#171717;color:#8f8f8f;flex:0 0 27px}.step-dot.active,.step-dot.done{background:#dedede;border-color:#dedede;color:#111}.step-line{height:1px;background:#414141;flex:1;min-width:0}.step-caption{display:none}.step2-intro{padding:13px 14px;margin-bottom:15px;border:1px solid #353535;border-radius:13px;background:#181818;display:flex;flex-direction:column;gap:5px}.step2-intro strong{font-size:16px;color:#eee}.step2-intro span{font-size:11px;color:#999}.step-actions{display:flex;gap:9px}.step-actions .save-btn{flex:1;margin-top:17px}.secondary-step-btn{background:#292929;color:#e5e5e5;border:1px solid #444}
+.screenshot-preview{width:100%;max-height:240px;object-fit:contain;border:1px solid #343434;border-radius:12px;background:#111;margin-top:9px;display:none}#tradeScreenshot{padding:10px!important;font-size:12px}#tradeScreenshot::file-selector-button{border:1px solid #444;background:#292929;color:#e2e2dd;border-radius:8px;padding:7px 10px;margin-right:10px;cursor:pointer}#entryPrice::-webkit-inner-spin-button,#entryPrice::-webkit-outer-spin-button,#exitPrice::-webkit-inner-spin-button,#exitPrice::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}#entryPrice,#exitPrice{-moz-appearance:textfield;appearance:textfield}.thesis-area{min-height:105px;resize:vertical;line-height:1.5}
+</style>
+
+<style id="compact-typography">
+/* Slightly smaller typography for a calmer mobile layout */
+.brand h1{font-size:18px!important}.brand p{font-size:11px!important}.pill{font-size:10px!important}
+.month-title{font-size:16px!important}.month-sub{font-size:11px!important}.weekdays div{font-size:10px!important}
+.daynum{font-size:11px!important}.legend{font-size:10px!important}
+.selected-head h2{font-size:15px!important}.selected-head span{font-size:11px!important}
+.trade-card .asset{font-size:14px!important}.trade-meta{font-size:10px!important}.badge{font-size:9px!important}
+.pnl{font-size:14px!important}.setup-line{font-size:11px!important}.card-hint{font-size:9px!important}
+.small-btn{font-size:10px!important}.fab{font-size:14px!important}.fab span{font-size:18px!important}
+.modal-head h2{font-size:16px!important}.field label{font-size:11px!important}.field input,.field select,.field textarea{font-size:13px!important}.field textarea{resize:vertical;min-height:82px;line-height:1.5}
+.radio{font-size:13px!important}.save-btn{font-size:14px!important}.hint{font-size:10px!important}.setup-chip{font-size:11px!important}
+.detail-item span{font-size:10px!important}.detail-item strong{font-size:13px!important}.toast{font-size:11px!important}
+
+/* V9: compact add button in the calendar card */
+.calendar-section{position:relative;padding-bottom:58px!important}
+.calendar-add{position:absolute;right:14px;bottom:16px;width:24px;height:24px;border:0;border-radius:0;background:transparent;color:#fff;font-family:Arial,sans-serif;font-size:22px;font-weight:300;line-height:1;display:grid;place-items:center;box-shadow:none;padding:0}
+.calendar-add:active{transform:scale(.96)}
+
+/* V18: subtle cross-fade when the selected day's page gradient changes */
+body{background:#151515;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at top,#242424 0%,#191919 44%,#151515 100%);background-attachment:fixed;opacity:1;transition:opacity .38s ease}
+body.page-win::before{background:radial-gradient(ellipse at top,#1b3023 0%,#191b19 44%,#151515 100%);background-attachment:fixed}
+body.page-loss::before{background:radial-gradient(ellipse at top,#351d21 0%,#1d191a 44%,#151515 100%);background-attachment:fixed}
+body.page-be::before{background:radial-gradient(ellipse at top,#302b19 0%,#1c1b17 44%,#151515 100%);background-attachment:fixed}
+body.page-none::before{background:radial-gradient(ellipse at top,#242424 0%,#191919 44%,#151515 100%);background-attachment:fixed}
+body.page-transition-out::before{opacity:0}
+@media(prefers-reduced-motion:reduce){body::before{transition:none}}
+.day{border-color:#ffffff18;background:#191919!important}
+.day.status-win{border-color:#477c55!important}
+.day.status-loss{border-color:#88484d!important}
+.day.status-be{border-color:#8a793e!important}
+.day.status-none{border-color:#414141!important}
+.day.selected{box-shadow:inset 0 0 0 1px #ffffff20}
+.day.today{box-shadow:inset 0 0 0 1px #ffffff28}
+.day.selected.status-win,.day.today.status-win{border-color:#477c55!important}
+.day.selected.status-loss,.day.today.status-loss{border-color:#88484d!important}
+.day.selected.status-be,.day.today.status-be{border-color:#8a793e!important}
+.day.selected.status-none,.day.today.status-none{border-color:#5a5a5a!important}
+
+
+/* V21: neutral calendar borders; only the daily R result carries outcome color */
+.day.status-win,.day.status-loss,.day.status-be,.day.status-none{border-color:#414141!important}
+.day.selected.status-win,.day.selected.status-loss,.day.selected.status-be,.day.selected.status-none{border-color:#a7a7a1!important}
+.day.today.status-win,.day.today.status-loss,.day.today.status-be,.day.today.status-none{border-color:#b9b9b3!important}
+/* V23: keep the page background gradient neutral gray for every trade result */
+body::before,
+body.page-win::before,
+body.page-loss::before,
+body.page-be::before,
+body.page-none::before{
+  background:radial-gradient(ellipse at top,#292929 0%,#1d1d1d 44%,#151515 100%)!important;
+  background-attachment:fixed;
+  opacity:1!important;
+  transition:none!important;
+}
+body.page-transition-out::before{opacity:1!important}
+
+/* V29: smooth animated transition between trade form steps */
+#tradeStep1, #tradeStep2{will-change:transform,opacity}
+#tradeStep1.step-enter-from-right, #tradeStep2.step-enter-from-right, #tradeStep3.step-enter-from-right{animation:stepEnterRight .28s cubic-bezier(.2,.75,.25,1) both}
+#tradeStep1.step-enter-from-left, #tradeStep2.step-enter-from-left, #tradeStep3.step-enter-from-left{animation:stepEnterLeft .28s cubic-bezier(.2,.75,.25,1) both}
+#tradeStep1.step-exit-to-left, #tradeStep2.step-exit-to-left, #tradeStep3.step-exit-to-left{animation:stepExitLeft .16s ease both}
+#tradeStep1.step-exit-to-right, #tradeStep2.step-exit-to-right, #tradeStep3.step-exit-to-right{animation:stepExitRight .16s ease both}
+@keyframes stepEnterRight{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
+@keyframes stepEnterLeft{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:translateX(0)}}
+@keyframes stepExitLeft{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-12px)}}
+@keyframes stepExitRight{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(12px)}}
+@media(prefers-reduced-motion:reduce){#tradeStep1,#tradeStep2{animation:none!important;will-change:auto}}
+.top-tools{display:flex;gap:6px;align-items:center}.top-tools .small-btn{padding:7px 9px;white-space:nowrap}.top{gap:8px}@media(max-width:430px){.top-tools{gap:4px}.top-tools .small-btn{font-size:9px;padding:6px 7px}.pill{display:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand"><div class="logo" aria-label="Trading journal logo"><svg viewBox="0 0 28 28" width="27" height="27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 22.5H23" stroke="#292929" stroke-width="1.6" stroke-linecap="round"/><path d="M8 18V11" stroke="#292929" stroke-width="1.8" stroke-linecap="round"/><rect x="6.2" y="13.2" width="3.6" height="4.8" rx=".7" fill="#292929"/><path d="M14 20V7" stroke="#292929" stroke-width="1.8" stroke-linecap="round"/><rect x="12.2" y="9.5" width="3.6" height="7.2" rx=".7" fill="#292929"/><path d="M20 16V10" stroke="#292929" stroke-width="1.8" stroke-linecap="round"/><rect x="18.2" y="11.2" width="3.6" height="3.8" rx=".7" fill="#292929"/><path d="M5.5 9.5L11.1 6.7L15.2 9.2L22.3 4.8" stroke="#292929" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.8 4.8H22.3V8.3" stroke="#292929" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h1>Trade Journal</h1></div></div><div class="top-tools" id="desktopTools" style="display:none"><button type="button" class="small-btn" id="exportBackup">Export Backup</button><button type="button" class="small-btn" id="restoreBackup">Restore</button><button type="button" class="small-btn" id="checkUpdates">Check Updates</button></div><div class="pill">Desktop · Local</div></header>
+  <section class="section calendar-section">
+    <div class="month-head"><div><div class="month-title" id="monthTitle"></div></div><div class="arrows"><button class="icon-btn" id="prevMonth" aria-label="Previous month">‹</button><button class="icon-btn" id="nextMonth" aria-label="Next month">›</button></div></div>
+    <div class="weekdays"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>
+    <div class="calendar" id="calendar"></div>
+    <button class="calendar-add" id="addTrade" aria-label="Add new trade" title="Add new trade">+</button>
+  </section>
+  <div class="selected-head"><h2 id="selectedTitle">Trades for the day</h2><span id="selectedCount">0 trades</span></div>
+  <section class="trade-list" id="tradeList"></section>
+</div>
+<div class="modal-back" id="modalBack"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><h2 id="modalTitle">New Trade</h2><button class="close" id="closeModal">×</button></div>
+<form id="tradeForm"><input type="hidden" id="tradeId"><input type="hidden" id="formStep" value="1">
+<div class="step-indicator" id="stepIndicator"><span class="step-dot active" data-step-dot="1">1</span><span class="step-line"></span><span class="step-dot" data-step-dot="2">2</span><span class="step-line"></span><span class="step-dot" data-step-dot="3">3</span></div>
+<div id="tradeStep1"><input id="entryDate" type="hidden"><input id="entryTime" type="hidden"><input id="exitTime" type="hidden"><div class="form-grid">
+<div class="field"><label for="assetSelect">Pair</label>
+<select id="assetSelect" required>
+  <optgroup label="Metals">
+    <option value="XAUUSD">XAUUSD</option><option value="XAGUSD">XAGUSD</option><option value="XPTUSD">XPTUSD</option>
+  </optgroup>
+  <optgroup label="Forex">
+    <option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option><option value="AUDUSD">AUDUSD</option><option value="USDCAD">USDCAD</option><option value="USDCHF">USDCHF</option><option value="NZDUSD">NZDUSD</option><option value="EURJPY">EURJPY</option><option value="GBPJPY">GBPJPY</option><option value="EURGBP">EURGBP</option>
+  </optgroup>
+  <optgroup label="Indices">
+    <option value="US30">US30</option><option value="US100">US100</option><option value="US500">US500</option><option value="GER40">GER40</option><option value="UK100">UK100</option><option value="JP225">JP225</option>
+  </optgroup>
+  <option value="__custom__">Other / Custom…</option>
+</select>
+<input id="customAsset" placeholder="Enter asset symbol" maxlength="24" autocapitalize="characters" style="display:none;margin-top:7px">
+</div>
+<div class="field"><label for="sessionSelect">Session</label><select id="sessionSelect" required><option value="">Select session</option><option>Asia</option><option>London</option><option>New York</option><option>London–New York Overlap</option><option>Other</option></select></div>
+<div class="field full"><label>Trade Direction</label><div class="radio-row"><button class="radio active buy" type="button" data-side="Buy">Buy</button><button class="radio sell" type="button" data-side="Sell">Sell</button></div></div>
+
+</div></div>
+<div id="tradeStep2" style="display:none">
+
+<div class="form-grid">
+<div class="field"><label for="liquiditySweep">Liquidity Sweep</label><select id="liquiditySweep"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+<div class="field"><label for="liquidityType">Liquidity Type</label><select id="liquidityType"><option value="">Not specified</option><option>Previous Day High / Low</option><option>Previous Week High / Low</option><option>Asia High / Low</option><option>London High / Low</option><option>Session High / Low</option><option>Swing High / Low</option><option>Equal Highs / Equal Lows</option><option>Internal Liquidity</option><option>External Liquidity</option><option>Buy-Side / Sell-Side Liquidity</option><option>Other</option></select></div>
+<div class="field"><label for="poiType">POI</label><select id="poiType"><option value="">Not specified</option><option>Order Block</option><option>Breaker Block</option><option>Mitigation Block</option><option>FVG</option><option>IFVG</option><option>Fibo Level</option><option value="__add_poi__">＋ Add POI…</option></select></div>
+<div class="field" id="poiTimeframeField"><label for="poiTimeframe">POI Timeframe</label><select id="poiTimeframe"><option value="">Not specified</option><option>1M</option><option>3M</option><option>5M</option><option>15M</option><option>30M</option><option>1H</option><option>2H</option><option>4H</option><option>1D</option><option>1W</option></select></div>
+<div class="field full" id="poiFiboLevelField" style="display:none"><label for="poiFiboLevel">Fibonacci Level</label><input id="poiFiboLevel" type="text" maxlength="100" placeholder="مثلاً: 0.618 / 0.705 / -0.272"></div>
+<div class="field"><label for="smt">SMT</label><select id="smt"><option value="">Select</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+<div class="field"><label for="smtPair">SMT Pair</label><select id="smtPair"><option value="">Select pair</option><option>XAUUSD</option><option>XAGUSD</option><option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option><option>AUDUSD</option><option>USDCAD</option><option>USDCHF</option><option>NZDUSD</option><option>EURJPY</option><option>GBPJPY</option><option>EURGBP</option><option>US30</option><option>US100</option><option>US500</option><option>GER40</option><option>UK100</option><option>JP225</option><option>Other</option></select></div>
+<div class="field"><label for="reaction">Reaction</label><select id="reaction"><option value="">Select reaction</option><option>Rejection</option><option>Displacement</option><option>MSS</option><option>None</option></select></div>
+<div class="field"><label for="entryModel">Entry Model</label><select id="entryModel"><option value="">Select entry model</option><option>Direct Entry</option><option>IFVG</option><option>CISD</option><option>FVG</option></select></div>
+
+</div></div>
+<div id="tradeStep3" style="display:none">
+<div class="form-grid">
+<div class="field"><label for="entryPrice">Entry Price</label><input id="entryPrice" type="number" step="any" placeholder="Entry price"></div>
+<div class="field"><label for="exitPrice">Exit Price</label><input id="exitPrice" type="number" step="any" placeholder="Exit price"></div>
+<div class="field"><label for="pnl">Result · PNL ($)</label><input id="pnl" type="number" step="any" placeholder="e.g. 150" required></div>
+<div class="field"><label for="rResult">Result · R</label><input id="rResult" type="number" step="any" placeholder="e.g. 2 or -1" required></div>
+<div class="field full"><label for="tradeScreenshot">Trade Screenshot</label><input id="tradeScreenshot" type="file" accept="image/*"><img id="screenshotPreview" class="screenshot-preview" alt="Trade screenshot preview"><button class="small-btn" type="button" id="removeScreenshot" style="display:none;margin-top:8px">Remove Screenshot</button></div>
+<div class="field full"><label for="tradeThesis">Trade Thesis</label><textarea id="tradeThesis" class="thesis-area" placeholder="Why did you take this trade? Describe the story, confirmations, and expected draw on liquidity…"></textarea></div>
+</div></div>
+<div class="step-actions"><button class="save-btn secondary-step-btn" id="backStep" type="button" style="display:none">Back</button><button class="save-btn" id="continueStep" type="button">Continue to Analysis →</button><button class="save-btn" id="continueStep2" type="button" style="display:none">Continue to Review →</button><button class="save-btn" id="saveTrade" type="submit" style="display:none">Save Trade</button></div></form>
+
+</div></div><div class="modal-back details-modal-back" id="detailsBack"><div class="modal details-modal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle"><div class="modal-head"><h2 id="detailsTitle">Trade Details</h2><button class="close" id="closeDetails" aria-label="Close details">×</button></div><div id="detailsContent"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const defaultSetups=['CISD + FVG','Liquidity Sweep','Order Block','Breaker Block','MSS / CHOCH','Other'];
+// Electron desktop builds persist these keys to an app-owned local JSON file.
+// Ordinary browser use retains the original localStorage behavior.
+const journalStorage=window.tradeJournalDesktop;
+function journalGet(key){const fallback=localStorage.getItem(key);if(journalStorage?.isDesktop)return journalStorage.getItem(key,fallback);return fallback}
+function journalSet(key,value){localStorage.setItem(key,value);if(journalStorage?.isDesktop){const ok=journalStorage.setItem(key,value);if(ok===false)console.error('Could not persist journal data locally:',key)}}
+let trades=JSON.parse(journalGet('tj_trades_v1')||'[]');let setups=JSON.parse(journalGet('tj_setups_v1')||'null')||defaultSetups.slice();let poiOptions=JSON.parse(journalGet('tj_poi_options_v1')||'null')||['Order Block','Breaker Block','Mitigation Block','FVG','IFVG','Fibo Level'];if(!poiOptions.includes('Fibo Level'))poiOptions.push('Fibo Level');let now=new Date();let viewYear=now.getFullYear(),viewMonth=now.getMonth();let selectedDate=isoDate(now);let side='Buy';let editing=false;
+function isoDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function isWeekendDate(value){if(!value)return false;const d=new Date(value+'T12:00:00');return d.getDay()===0||d.getDay()===6}
+function saveData(){journalSet('tj_trades_v1',JSON.stringify(trades));journalSet('tj_setups_v1',JSON.stringify(setups));journalSet('tj_poi_options_v1',JSON.stringify(poiOptions))}
+function renderPoiOptions(selected=''){const el=$('poiType');if(!el)return;el.innerHTML='<option value="">Not specified</option>'+poiOptions.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')+'<option value="__add_poi__">＋ Add POI…</option>';if(selected && !poiOptions.includes(selected)){poiOptions.push(selected);journalSet('tj_poi_options_v1',JSON.stringify(poiOptions));renderPoiOptions(selected)}else el.value=selected||''}
+function updatePoiFields(){const fibo=$('poiType').value==='Fibo Level';$('poiTimeframeField').style.display='';$('poiFiboLevelField').style.display=fibo?'block':'none'}
+function handlePoiChange(){const el=$('poiType');if(el.value!=='__add_poi__')return;const name=prompt('Enter a new POI option:');const clean=(name||'').trim();if(clean&&!poiOptions.some(x=>x.toLowerCase()===clean.toLowerCase())){poiOptions.push(clean);journalSet('tj_poi_options_v1',JSON.stringify(poiOptions));renderPoiOptions(clean)}else renderPoiOptions('')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function signed(n,unit=''){n=Number(n)||0;return `${n>0?'+':''}${n.toLocaleString('en-US',{maximumFractionDigits:2})}${unit}`}
+function resultClass(t){const p=Number(t.pnl),r=Number(t.r);return p>0||r>0?'win':p<0||r<0?'loss':'be'}
+function renderCalendar(){ $('monthTitle').textContent=`${monthNames[viewMonth]} ${viewYear}`;const first=new Date(viewYear,viewMonth,1).getDay();const days=new Date(viewYear,viewMonth+1,0).getDate();let html='';for(let i=0;i<first;i++)html+='<div class="day empty"></div>';for(let d=1;d<=days;d++){const date=`${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const weekend=isWeekendDate(date);const dayTrades=weekend?[]:trades.filter(t=>t.date===date);const netR=dayTrades.reduce((sum,t)=>sum+(Number(t.r)||0),0);const status=!dayTrades.length?'status-none':Math.abs(netR)<0.000001?'status-be':netR>0?'status-win':'status-loss';const classes=['day',status,weekend?'weekend':'',date===selectedDate?'selected':'',date===isoDate(now)?'today':''].filter(Boolean).join(' ');const rLabel=dayTrades.length?`${netR>0?'+':''}${Number(netR.toFixed(2))}R`:'';html+=`<button class="${classes}" data-date="${date}" ${weekend?'disabled aria-disabled="true" title="Weekend — no trading"':''} aria-label="${date}${weekend?', weekend — unavailable':dayTrades.length?`, result ${rLabel}`:''}"><span class="daynum">${d}</span>${dayTrades.length?`<span class="day-result ${status}">${rLabel}</span>`:''}</button>`}$('calendar').innerHTML=html;$('calendar').querySelectorAll('[data-date]:not(:disabled)').forEach(b=>b.addEventListener('click',()=>{selectedDate=b.dataset.date;renderCalendar();renderTrades();$('addTrade').disabled=isWeekendDate(selectedDate)}));$('addTrade').disabled=isWeekendDate(selectedDate)}
+function updatePageBackground(){const dayTrades=trades.filter(t=>t.date===selectedDate);const net=dayTrades.reduce((sum,t)=>sum+(Number(t.pnl)||0),0);const status=!dayTrades.length?'page-none':Math.abs(net)<0.000001?'page-be':net>0?'page-win':'page-loss';const body=document.body;const current=['page-win','page-loss','page-be','page-none'].find(c=>body.classList.contains(c));if(current===status)return;body.classList.add('page-transition-out');window.setTimeout(()=>{body.classList.remove('page-win','page-loss','page-be','page-none');body.classList.add(status);requestAnimationFrame(()=>body.classList.remove('page-transition-out'));},170)}
+function renderTrades(){updatePageBackground();const dt=new Date(selectedDate+'T12:00:00');$('selectedTitle').textContent=`Trades for ${monthNames[dt.getMonth()]} ${dt.getDate()}`;const list=trades.filter(t=>t.date===selectedDate).sort((a,b)=>(a.entry||'').localeCompare(b.entry||''));$('selectedCount').textContent=`${list.length} ${list.length===1?'trade':'trades'}`;if(!list.length){$('tradeList').innerHTML='<div class="empty-state">No Trades On This Day</div>';return}$('tradeList').innerHTML=list.map(t=>{const cls=resultClass(t),p=Number(t.pnl),r=Number(t.r);return `<article class="trade-card ${cls}" data-details="${esc(t.id)}" role="button" tabindex="0" aria-label="View details for ${esc(t.asset)}"><div class="trade-top"><div class="asset">${esc(t.asset.toUpperCase())}</div><div class="badges"><span class="badge ${t.side==='Buy'?'buy':'sell'}">${t.side==='Buy'?'BUY':'SELL'}</span></div></div><div class="pnl"><span class="${p>0?'positive':p<0?'negative':'neutral'}">${signed(p,' $')}</span><span class="${r>0?'positive':r<0?'negative':'neutral'}">${signed(r,'R')}</span></div><div class="card-hint">Tap to view details ↗</div></article>`}).join('');$('tradeList').querySelectorAll('[data-details]').forEach(card=>{card.onclick=()=>openDetails(card.dataset.details);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDetails(card.dataset.details)}}})}
+function openDetails(id){const t=trades.find(x=>x.id===id);if(!t)return;const p=Number(t.pnl),r=Number(t.r);$('detailsTitle').textContent=`${t.asset.toUpperCase()} · ${t.side.toUpperCase()}`;$('detailsContent').innerHTML=`<div class="details-grid"><div class="detail-item"><span>Asset</span><strong>${esc(t.asset.toUpperCase())}</strong></div><div class="detail-item"><span>Direction</span><strong>${t.side==='Buy'?'BUY':'SELL'}</strong></div><div class="detail-item"><span>Session</span><strong>${esc(t.session||'—')}</strong></div><div class="detail-item"><span>Entry Date</span><strong>${esc(t.date)}</strong></div><div class="detail-item"><span>Entry Time</span><strong>${esc(t.entry||'—')}</strong></div><div class="detail-item"><span>Exit Time</span><strong>${esc(t.exit||'—')}</strong></div><div class="detail-item"><span>Entry Price</span><strong>${esc(t.entryPrice??'—')}</strong></div><div class="detail-item"><span>Exit Price</span><strong>${esc(t.exitPrice??'—')}</strong></div><div class="detail-item"><span>PNL</span><strong class="${p>0?'positive':p<0?'negative':'neutral'}">${signed(p,' $')}</strong></div><div class="detail-item"><span>Result · R</span><strong class="${r>0?'positive':r<0?'negative':'neutral'}">${signed(r,'R')}</strong></div><div class="detail-item"><span>Liquidity Sweep</span><strong>${esc(t.liquiditySweep||'—')}</strong></div><div class="detail-item"><span>Liquidity Type</span><strong>${esc(t.liquidityType||'—')}</strong></div><div class="detail-item"><span>POI</span><strong>${esc(t.poiType||'—')}</strong></div><div class="detail-item"><span>POI Timeframe</span><strong>${esc(t.poiTimeframe||'—')}</strong></div><div class="detail-item"><span>Fibonacci Level</span><strong>${esc(t.poiFiboLevel||'—')}</strong></div><div class="detail-item"><span>SMT</span><strong>${esc(t.smt||'—')}</strong></div><div class="detail-item"><span>SMT Pair</span><strong>${esc(t.smtPair||'—')}</strong></div><div class="detail-item"><span>Reaction</span><strong>${esc(t.reaction||'—')}</strong></div><div class="detail-item"><span>Entry Model</span><strong>${esc(t.entryModel||'—')}</strong></div></div>${t.tradeThesis?`<div class="detail-item thesis-detail"><span>Trade Thesis</span><strong style="white-space:pre-wrap;display:block;margin-top:8px">${esc(t.tradeThesis)}</strong></div>`:''}${t.screenshot?`<div class="detail-item screenshot-detail"><span>Trade Screenshot</span><img src="${t.screenshot}" alt="Trade screenshot" style="width:100%;max-height:320px;object-fit:contain;border-radius:12px;margin-top:8px;background:#101010"></div>`:''}<div class="detail-actions"><button class="small-btn" type="button" id="detailEdit">Edit Trade</button><button class="small-btn delete" type="button" id="detailDelete">Delete Trade</button></div>`;$('detailsBack').classList.add('open');$('detailEdit').onclick=()=>{if(isWeekendDate(t.date)){toast('Weekend — editing is disabled');return}$('detailsBack').classList.remove('open');openEdit(id)};$('detailDelete').onclick=()=>{if(isWeekendDate(t.date)){toast('Weekend — editing is disabled');return}$('detailsBack').classList.remove('open');deleteTrade(id)}}
+function closeDetails(){$('detailsBack').classList.remove('open')}
+function renderAll(){renderCalendar();renderTrades()}
+function showTradeStep(step,animate=false){const current=Number($('formStep').value)||1;const panels={1:$('tradeStep1'),2:$('tradeStep2'),3:$('tradeStep3')};const fromRight=step>current;const oldPanel=panels[current],newPanel=panels[step];if(animate&&current!==step){oldPanel.classList.remove('step-enter-from-right','step-enter-from-left','step-exit-to-left','step-exit-to-right');oldPanel.classList.add(fromRight?'step-exit-to-left':'step-exit-to-right');window.setTimeout(()=>{oldPanel.style.display='none';oldPanel.classList.remove('step-exit-to-left','step-exit-to-right');newPanel.style.display='block';newPanel.classList.remove('step-enter-from-right','step-enter-from-left');void newPanel.offsetWidth;newPanel.classList.add(fromRight?'step-enter-from-right':'step-enter-from-left');window.setTimeout(()=>newPanel.classList.remove('step-enter-from-right','step-enter-from-left'),320)},160)}else{Object.entries(panels).forEach(([n,p])=>{p.style.display=Number(n)===step?'block':'none';p.classList.remove('step-enter-from-right','step-enter-from-left','step-exit-to-left','step-exit-to-right')})}$('formStep').value=String(step);$('continueStep').style.display=step===1?'block':'none';$('continueStep2').style.display=step===2?'block':'none';$('saveTrade').style.display=step===3?'block':'none';$('backStep').style.display=step===1?'none':'block';document.querySelectorAll('[data-step-dot]').forEach(dot=>{const n=Number(dot.dataset.stepDot);dot.classList.toggle('active',n===step);dot.classList.toggle('done',n<step)})}
+function validateTradeDetails(){const ids=['assetSelect','sessionSelect'];for(const id of ids){const el=$(id);if(id==='assetSelect'&&el.value==='__custom__'){if(!$('customAsset').value.trim()){ $('customAsset').reportValidity();return false; }continue;}if(!el.checkValidity()){el.reportValidity();return false;}}return true}
+function openNew(){if(isWeekendDate(selectedDate)){toast('Weekend — no trades can be added');return}editing=false;$('modalTitle').textContent='Add New Trade';$('tradeForm').reset();renderPoiOptions();updatePoiFields();$('tradeId').value='';$('assetSelect').value='XAUUSD';$('customAsset').value='';$('customAsset').style.display='none';$('customAsset').required=false;$('entryDate').value=selectedDate;$('entryTime').value='';$('exitTime').value='';$('entryPrice').value='';$('exitPrice').value='';$('pnl').value='';$('rResult').value='';$('tradeThesis').value='';$('tradeScreenshot').value='';$('screenshotPreview').src='';$('screenshotPreview').style.display='none';$('removeScreenshot').style.display='none';$('removeScreenshot').dataset.removed='false';$('sessionSelect').value='';$('liquiditySweep').selectedIndex=-1;side='Buy';setSide();$('tradeForm').style.display='block';showTradeStep(1);$('modalBack').classList.add('open')}
+function openEdit(id){const t=trades.find(x=>x.id===id);if(!t)return;if(isWeekendDate(t.date)){toast('Weekend — editing is disabled');return}editing=true;$('modalTitle').textContent='Edit Trade';$('tradeId').value=t.id;setAssetValue(t.asset);$('entryDate').value=t.date;$('entryTime').value=t.entry||'';$('exitTime').value=t.exit||'';$('sessionSelect').value=t.session||'';$('pnl').value=t.pnl;$('rResult').value=t.r;$('entryPrice').value=t.entryPrice??'';$('exitPrice').value=t.exitPrice??'';$('tradeThesis').value=t.tradeThesis||'';$('tradeScreenshot').value='';$('screenshotPreview').src=t.screenshot||'';$('screenshotPreview').style.display=t.screenshot?'block':'none';$('removeScreenshot').style.display=t.screenshot?'inline-block':'none';$('removeScreenshot').dataset.removed='false';side=t.side;setSide();['liquiditySweep','liquidityType','reaction','entryModel','smt','smtPair','poiTimeframe','poiFiboLevel'].forEach(id=>{if($(id))$(id).value=t[id]||''});renderPoiOptions(t.poiType||'');updatePoiFields();$('tradeForm').style.display='block';showTradeStep(1);$('modalBack').classList.add('open')}
+function setAssetValue(value){const select=$('assetSelect');const exists=[...select.options].some(o=>o.value===value&&o.value!=='__custom__');if(exists){select.value=value;$('customAsset').value='';$('customAsset').style.display='none';$('customAsset').required=false}else{select.value='__custom__';$('customAsset').value=value||'';$('customAsset').style.display='block';$('customAsset').required=true}}
+function getAssetValue(){return $('assetSelect').value==='__custom__'?$('customAsset').value.trim().toUpperCase():$('assetSelect').value}
+function setSide(){document.querySelectorAll('[data-side]').forEach(b=>{b.classList.toggle('active',b.dataset.side===side);b.classList.toggle('buy',b.dataset.side==='Buy'&&side==='Buy');b.classList.toggle('sell',b.dataset.side==='Sell'&&side==='Sell')})}
+function closeModal(){$('modalBack').classList.remove('open')}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2100)}
+function deleteTrade(id){if(!confirm('Are you sure you want to delete this trade?'))return;trades=trades.filter(t=>t.id!==id);saveData();renderAll();toast('Trade deleted')}
+$('poiType').addEventListener('change',()=>{handlePoiChange();updatePoiFields()});renderPoiOptions();updatePoiFields();$('assetSelect').addEventListener('change',()=>{const custom=$('assetSelect').value==='__custom__';$('customAsset').style.display=custom?'block':'none';$('customAsset').required=custom;if(custom)$('customAsset').focus()});$('addTrade').onclick=openNew;$('closeModal').onclick=closeModal;$('closeDetails').onclick=closeDetails;$('detailsBack').addEventListener('click',e=>{if(e.target===$('detailsBack'))closeDetails()});$('modalBack').addEventListener('click',e=>{if(e.target===$('modalBack'))closeModal()});$('prevMonth').onclick=()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--}renderCalendar()};$('nextMonth').onclick=()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++}renderCalendar()};document.querySelectorAll('[data-side]').forEach(b=>b.onclick=()=>{side=b.dataset.side;setSide()});
+$('entryDate').addEventListener('change',()=>{if(isWeekendDate($('entryDate').value)){toast('Saturday and Sunday are non-trading days');$('entryDate').value=''}});
+$('continueStep').onclick=()=>{if(!validateTradeDetails())return;const date=$('entryDate').value;if(isWeekendDate(date)){toast('Saturday and Sunday are non-trading days');return}showTradeStep(2,true)};
+$('backStep').onclick=()=>showTradeStep(1,true);
+
+if(journalStorage?.isDesktop){$('desktopTools').style.display='flex';$('exportBackup').addEventListener('click',async()=>{const result=await journalStorage.exportBackup();if(result?.ok)toast(result.message||'Backup exported');else if(!result?.canceled)toast(result?.message||'Backup export failed')});$('restoreBackup').addEventListener('click',async()=>{const result=await journalStorage.restoreBackup();if(result?.ok){toast(result.message||'Backup restored');setTimeout(()=>window.location.reload(),700)}else if(!result?.canceled)toast(result?.message||'Backup restore failed')});$('checkUpdates').addEventListener('click',async()=>{const result=await journalStorage.checkForUpdates();if(result?.ok&&result?.available)toast('Update downloaded and verified');else if(result?.ok)toast(result.message||'Already up to date');else toast(result?.message||'Update check failed')});journalStorage.onUpdateReady?.(()=>toast('A verified UI update is ready. Use Check Updates to apply it.'))}
+$('tradeForm').addEventListener('submit',e=>{e.preventDefault();const step=Number($('formStep').value)||1;if(step===1){if(!validateTradeDetails())return;const date=$('entryDate').value;if(isWeekendDate(date)){toast('Saturday and Sunday are non-trading days');return}showTradeStep(2,true);return}if(step===2){showTradeStep(3,true);return}const date=$('entryDate').value;if(!getAssetValue()||!date)return;if(isWeekendDate(date)){toast('Saturday and Sunday are non-trading days');return}const t={id:$('tradeId').value||String(Date.now()),asset:getAssetValue(),date,entry:$('entryTime').value,exit:$('exitTime').value,entryPrice:$('entryPrice').value,exitPrice:$('exitPrice').value,session:$('sessionSelect').value,side,pnl:Number($('pnl').value),r:Number($('rResult').value),tradeThesis:$('tradeThesis').value.trim(),screenshot:$('removeScreenshot').dataset.removed==='true'?'':$('screenshotPreview').src&&$('screenshotPreview').style.display!=='none'&&$('screenshotPreview').src.startsWith('data:')?$('screenshotPreview').src:(trades.find(x=>x.id===($('tradeId').value))||{}).screenshot||'',liquiditySweep:$('liquiditySweep').value,liquidityType:$('liquidityType').value,poiType:$('poiType').value,poiTimeframe:$('poiTimeframe').value,poiFiboLevel:$('poiFiboLevel').value.trim(),reaction:$('reaction').value,entryModel:$('entryModel').value,smt:$('smt').value,smtPair:$('smtPair').value};const i=trades.findIndex(x=>x.id===t.id);if(i>=0)trades[i]=t;else trades.push(t);selectedDate=date;const d=new Date(date+'T12:00:00');viewYear=d.getFullYear();viewMonth=d.getMonth();saveData();renderAll();closeModal();toast(i>=0?'Trade updated':'Trade saved')});
+$('continueStep').onclick=()=>{if(!validateTradeDetails())return;const date=$('entryDate').value;if(isWeekendDate(date)){toast('Saturday and Sunday are non-trading days');return}showTradeStep(2,true)};
+$('continueStep2').onclick=()=>showTradeStep(3,true);
+$('backStep').onclick=()=>showTradeStep(Math.max(1,(Number($('formStep').value)||1)-1),true);
+$('tradeScreenshot').addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){toast('Please choose an image file');return}const reader=new FileReader();reader.onload=()=>{$('screenshotPreview').src=reader.result;$('screenshotPreview').style.display='block';$('removeScreenshot').style.display='inline-block'};reader.readAsDataURL(file)});
+$('removeScreenshot').onclick=()=>{$('tradeScreenshot').value='';$('screenshotPreview').src='';$('screenshotPreview').style.display='none';$('removeScreenshot').style.display='none';$('removeScreenshot').dataset.removed='true'};
+renderAll();$('addTrade').disabled=isWeekendDate(selectedDate);
+</script>
+<!-- V40: Full-width stage progress, cleaner pair labels, simplified liquidity sweep and screenshot UI. -->
+</body></html>
+
+<style>
+/* V25: calendar days are compact soft-corner squares */
+.calendar .day{aspect-ratio:1 / 1;min-height:0;height:auto;padding:4px 1px;justify-content:center;border-radius:10px;overflow:hidden}
+.calendar .daynum{line-height:16px}
+.calendar .day-result{font-size:9px;line-height:12px;margin-top:1px;letter-spacing:-.2px}
+@media(min-width:520px){.calendar .day{min-height:0}}
+</style>
